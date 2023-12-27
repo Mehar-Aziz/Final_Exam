@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Dragons from './components/Dragons';
 import Missions from './components/Missions';
 import './App.css';
-import Myprofile from './components/MyProfile';
+import MyProfile from './components/MyProfile';
 import { fetchDragons } from './app/dragon/dragonSlice';
 import { fetchMissions } from './app/missions/missionSlice';
 
@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<Dragons />} />
           <Route path="/missions" element={<Missions />} />
           <Route path="/dragons" element={<Dragons />} />
-          <Route path="/profile" element={<Myprofile />} />
+          <Route path="/profile" element={<MyProfile />} />
         </Routes>
       </BrowserRouter>
     </div>

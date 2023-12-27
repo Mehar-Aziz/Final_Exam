@@ -9,6 +9,7 @@ const initialState = {
 export const fetchDragons = createAsyncThunk(
   'missions/fetchDragons',
   async () => {
+    console.log('hi')
     const responce = await fetch(URL);
     const result = await responce.json();
     const dragonArr = result.map((item) => ({
