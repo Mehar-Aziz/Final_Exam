@@ -9,15 +9,19 @@ const initialState = {
 export const fetchMissions = createAsyncThunk(
   'missions/fetchMissions',
   async () => {
-    const res = await fetch(URL);
-    const result = await res.json();
-    const missionArray = result.map((item) => ({
-      mission_id: item.mission_id,
-      mission_name: item.mission_name,
-      description: item.description,
-      reserved: false,
-    }));
-    return missionArray;
+    try {
+      const res = await fetch(URL);
+      const result = await res.json();
+      const missionArray = result.map((item) => ({
+        mission_id: item.mission_id,
+        mission_name: item.mission_name,
+        description: item.description,
+        reserved: false,
+      }));
+      return missionArray;
+    } catch (error) {
+      throw Error('Error fetching missions');
+    }
   },
 );
 
@@ -36,13 +40,9 @@ const missionsSlice = createSlice({
         }
         return mission;
       });
-      return {
-        ...state,
-        missions: updatedMissions,
-      };
+      state.missions = updatedMissions;
     },
   },
-  
 });
 
 export const { reserveMission } = missionsSlice.actions;

@@ -7,19 +7,22 @@ const initialState = {
 };
 
 export const fetchDragons = createAsyncThunk(
-  'missions/fetchDragons',
+  'dragons/fetchDragons',
   async () => {
-    console.log('hi')
-    const responce = await fetch(URL);
-    const result = await responce.json();
-    const dragonArr = result.map((item) => ({
-      id: item.id,
-      name:item.name,
-      type:item.type,
-      flickr_images:item.flickr_images,
-      reserved: false,
-    }));
-    return dragonArr;
+    try {
+      const response = await fetch(URL);
+      const result = await response.json();
+      const dragonArr = result.map((item) => ({
+        id: item.id,
+        name: item.name,
+        type: item.type,
+        flickr_images: item.flickr_images,
+        reserved: false,
+      }));
+      return dragonArr;
+    } catch (error) {
+      throw Error('Error fetching dragons');
+    }
   },
 );
 
@@ -29,7 +32,7 @@ const dragonsSlice = createSlice({
   reducers: {
     reserveDragon: (state, action) => {
       const findDragon = action.payload;
-      const updatedDragons = state.missions.map((dragon) => {
+      const updatedDragons = state.dragons.map((dragon) => {
         if (dragon.id === findDragon) {
           return {
             ...dragon,
@@ -38,13 +41,9 @@ const dragonsSlice = createSlice({
         }
         return dragon;
       });
-      return {
-        ...state,
-        dragon: updatedDragons,
-      };
+      state.dragons = updatedDragons;
     },
   },
-  
 });
 
 export const { reserveDragon } = dragonsSlice.actions;
