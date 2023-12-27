@@ -4,16 +4,17 @@ import { useDispatch } from 'react-redux';
 import Navbar from './components/Navbar';
 import Dragons from './components/Dragons';
 import Missions from './components/Missions';
-import { fetchMissions } from './redux/missions/missionsSlice';
+
 import './App.css';
 import Myprofile from './components/MyProfile';
 import { fetchDragons } from './app/dragon/dragonSlice';
+import { fetchMissions } from './app/missions/missionSlice';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMissions());
+    dispatch(fetchMissions);
     dispatch(fetchDragons());
   }, [dispatch]);
 
@@ -22,7 +23,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Rockets />} />
+          <Route path="/" element={<Dragons />} />
           <Route path="/missions" element={<Missions />} />
           <Route path="/dragons" element={<Dragons />} />
           <Route path="/profile" element={<Myprofile />} />
