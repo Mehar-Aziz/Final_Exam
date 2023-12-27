@@ -37,7 +37,7 @@ function MyProfile() {
               </li>
             ))
           ) : (
-            <li>No Dragon</li>
+            <li>No Dra</li>
           )}
         </ul>
       </div>

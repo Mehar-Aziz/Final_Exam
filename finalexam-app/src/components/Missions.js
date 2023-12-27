@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reserveMission } from '../app/missions/missionSlice';
 
 function Missions() {
-  const { missions } = useSelector((state) => state.missions);
-  const dispatch = useDispatch();
-
-  return (
-    <div>
-      {missions.length > 1
-        ? (
+    const { missions } = useSelector((state) => state.missions);
+    const dispatch = useDispatch();
+  
+    return (
+      <div>
+        {missions.length > 0 ? (
           <table>
             <thead>
               <tr>
@@ -20,29 +19,22 @@ function Missions() {
             </thead>
             <tbody>
               {missions.map((mission, index) => (
-                <tr
-                  key={mission.mission_id}
-                >
-                  <td>
-                    {mission.mission_name}
-                  </td>
+                <tr key={mission.mission_id}>
+                  <td>{mission.mission_name}</td>
                   <td>{mission.description}</td>
                   <td>
-                    <span>
-                      {mission.reserved ? 'active member' : 'not a member'}
-                    </span>
+                    <span>{mission.reserved ? 'active member' : 'not a member'}</span>
                   </td>
                   <td>
                     <button
                       type="button"
                       className={
-                    mission.reserved
-                      ? 'py-1 px-3 rounded border-2 border-pink'
-                      : 'py-1 px-3 rounded border-2 border-black'
-                  }
-                      id={mission.mission_id}
+                        mission.reserved
+                          ? 'py-1 px-3 rounded border-2 border-pink'
+                          : 'py-1 px-3 rounded border-2 border-black'
+                      }
                       onClick={() => {
-                        dispatch(reserveMission(missions.mission_id));
+                        dispatch(reserveMission(mission.mission_id));
                       }}
                     >
                       {mission.reserved ? 'Leave Mission' : 'Join Mission'}
@@ -52,10 +44,12 @@ function Missions() {
               ))}
             </tbody>
           </table>
-        )
-        : <p>loading ...</p>}
-    </div>
-  );
-}
-
-export default Missions;
+        ) : (
+          <p>loading ...</p>
+        )}
+      </div>
+    );
+  }
+  
+  export default Missions;
+  
