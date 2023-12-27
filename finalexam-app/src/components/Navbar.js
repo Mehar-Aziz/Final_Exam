@@ -4,9 +4,6 @@ import { NavLink } from 'react-router-dom';
 const Navbar = () => (
   <header>
     <div>
-      <a href="/">
-        <img  src="" alt="logo" />
-      </a>
       <span >Space Travelers Hub</span>
 
     </div>
