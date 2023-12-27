@@ -3,10 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => (
   <header>
-    <div>
       <span >Space Travelers Hub</span>
-
-    </div>
     <nav>
       <NavLink to="/">Dragon</NavLink>
       <NavLink to="/missions">Missions</NavLink>
